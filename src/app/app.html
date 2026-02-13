@@ -1,2 +1,7 @@
-<h1>Welcome to Angular!</h1>
+<h1>{{ title() }}</h1>
+<h4 class="date-cls">{{ date }}</h4>
+<button (click)="handleClickEvent()">Click here</button>
+<img [src]="imgSrc" alt="Bg Img" />
+<app-about></app-about>
+<app-services></app-services>
 <router-outlet />
