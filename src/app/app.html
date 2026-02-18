@@ -3,5 +3,21 @@
 <button (click)="handleClickEvent()">Click here</button>
 <img [src]="imgSrc" alt="Bg Img" />
 <app-about></app-about>
+
 <app-services></app-services>
+
+<hr>
+<div style="padding: 20px;">
+    <h2>Lifecycle Hooks Module</h2>
+    <button (click)="toggleLifecycle()">
+        {{ showLifecycle ? 'Destroy Component' : 'Create Component' }}
+    </button>
+    <button (click)="updateLifecycleData()" [disabled]="!showLifecycle">
+        Update Data
+    </button>
+
+    <app-lifecycle-demo *ngIf="showLifecycle" [data]="lifecycleData" (reset)="resetData($event)">
+    </app-lifecycle-demo>
+</div>
+<hr>
 <router-outlet />

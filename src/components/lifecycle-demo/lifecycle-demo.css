@@ -1,0 +1,33 @@
+.lifecycle-container {
+  border: 2px dashed #673ab7;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  background-color: #f3e5f5;
+}
+
+h3 {
+  margin-top: 0;
+  color: #512da8;
+}
+
+.status-box {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  border: 1px solid #d1c4e9;
+}
+
+.value {
+  color: #d81b60;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 1.2em;
+}
+
+.hint {
+  font-style: italic;
+  color: #666;
+  font-size: 0.9em;
+}
