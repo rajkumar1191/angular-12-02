@@ -4,15 +4,22 @@ import { RouterOutlet } from '@angular/router';
 import { About } from '../components/about/about';
 import { Services } from '../components/services/services';
 import { LifecycleDemo } from '../components/lifecycle-demo/lifecycle-demo';
+import { AppHighlight } from './app-highlight';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, About, Services, LifecycleDemo, CommonModule],
+  imports: [RouterOutlet, About, Services, LifecycleDemo, CommonModule, AppHighlight],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('angular-app-new');
+
+  course = [
+    { name: 'Angular', duration: '4 weeks' },
+    { name: 'React', duration: '3 weeks' },
+    { name: 'Vue', duration: '2 weeks' },
+  ]
 
   date = new Date();
 
@@ -22,6 +29,10 @@ export class App {
   // Lifecycle Demo Controls
   showLifecycle: boolean = true;
   lifecycleData: string = 'Initial Data';
+
+  themeColor = 'cyan';
+
+  fontSize = 35;
 
   handleClickEvent() {
     alert('Clicked');

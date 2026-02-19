@@ -3,3 +3,16 @@
     font-size: 1.2rem;
     font-weight: 400;
 }
+
+
+.success{
+    color: green;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.error{
+    color: red;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
