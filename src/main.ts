@@ -23,4 +23,9 @@ bootstrapApplication(App, appConfig)
         3. Component Directives:-
           - AppComponent
 
+
+    Pipes:-
+      Which allow us to transform data in the template.
+       - They are used to transform data in a declarative way.
+       - They can be applied to elements, attributes, and components.
   */

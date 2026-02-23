@@ -5,15 +5,16 @@ import { About } from '../components/about/about';
 import { Services } from '../components/services/services';
 import { LifecycleDemo } from '../components/lifecycle-demo/lifecycle-demo';
 import { AppHighlight } from './app-highlight';
+import { ReversePipe } from './reverse-pipe';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, About, Services, LifecycleDemo, CommonModule, AppHighlight],
+  imports: [RouterOutlet, About, Services, LifecycleDemo, CommonModule, AppHighlight, ReversePipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('angular-app-new');
+  protected readonly title = signal('angular app new');
 
   course = [
     { name: 'Angular', duration: '4 weeks' },
@@ -22,6 +23,12 @@ export class App {
   ]
 
   date = new Date();
+
+  jsonData = {
+    name: 'Angular',
+    version: '12',
+    features: ['Components', 'Directives', 'Pipes', 'Services'],
+  };
 
   imgSrc =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHfD9JWXBHo5Pn2VrDXQwfBl_aWgd7q-0iTA&s';
@@ -33,6 +40,11 @@ export class App {
   themeColor = 'cyan';
 
   fontSize = 35;
+
+  price = 100.25;
+  percentValue = .25;
+
+  name: any = 'Angular';
 
   handleClickEvent() {
     alert('Clicked');

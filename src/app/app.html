@@ -1,5 +1,21 @@
-<h1>{{ title() }}</h1>
-<h4 class="date-cls" appAppHighlight="lightblue">{{ date }}</h4>
+<h1>{{ title() | uppercase}}</h1>
+<h1>{{ title() | lowercase}}</h1>
+<h1>{{ title() | titlecase}}</h1>
+<h4 class="date-cls" appAppHighlight="lightblue">{{ date | date:'dd-MMM-yyyy' }}</h4>
+
+<p>Price: {{ price | currency:'USD' }}</p>
+<p>Price: {{ price | currency:'EUR' }}</p>
+<p>Price: {{ price | currency:'INR' }}</p>
+
+<p>Name: {{ name | slice:0:3 }} </p>
+<p>Percentage: {{ percentValue | percent }}</p>
+
+<span>{{ jsonData | json }}</span>
+
+<p>Reversed Name: {{ name | reverse }}</p>
+
+
+
 <button (click)="handleClickEvent()">Click here</button>
 <img [src]="imgSrc" alt="Bg Img" />
 <app-about></app-about>
