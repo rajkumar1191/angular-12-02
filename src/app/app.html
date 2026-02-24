@@ -31,27 +31,38 @@
   <button (click)="updateLifecycleData()" [disabled]="!showLifecycle">Update Data</button>
 
   @if (showLifecycle) {
-    <app-lifecycle-demo [data]="lifecycleData" (reset)="resetData($event)"> </app-lifecycle-demo>
+  <app-lifecycle-demo [data]="lifecycleData" (reset)="resetData($event)"> </app-lifecycle-demo>
   }
 
   @for (item of course; track item.name) {
-    <p style="font-size: 1.2rem; font-weight: 400;">{{ item.name }} - {{ item.duration }}</p>
+  <p style="font-size: 1.2rem; font-weight: 400;">{{ item.name }} - {{ item.duration }}</p>
   }
 
   @switch (date.getDay()) {
-    @case (0) {
-      <p>Today is Sunday</p>
-    }
-    @case (4) {
-      <p [ngStyle]="{ color: themeColor, 'font-size': fontSize + 'px' }">Today is Thursday</p>
-    }
-    @case (6) {
-      <p>Today is Saturday</p>
-    }
-    @default {
-      <p>Today is a weekday</p>
-    }
+  @case (0) {
+  <p>Today is Sunday</p>
+  }
+  @case (4) {
+  <p [ngStyle]="{ color: themeColor, 'font-size': fontSize + 'px' }">Today is Thursday</p>
+  }
+  @case (6) {
+  <p>Today is Saturday</p>
+  }
+  @default {
+  <p>Today is a weekday</p>
+  }
   }
 </div>
 <hr />
-<router-outlet />
+<app-forms-tutorial></app-forms-tutorial>
+<hr />
+<!-- <app-services-tutorial></app-services-tutorial>
+<hr />
+<app-signals-tutorial></app-signals-tutorial>
+<hr />
+<app-routing-tutorial></app-routing-tutorial>
+<hr />
+<div class="router-container" style="padding: 20px; background: #fdfdfd; border-radius: 8px; margin-top:20px;">
+  <h2>Active Route View</h2>
+  <router-outlet />
+</div> -->

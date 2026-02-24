@@ -1,0 +1,227 @@
+.tutorial-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #f8fbff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+}
+
+.form-section {
+    margin-top: 40px;
+    padding: 20px 25px;
+    background: #ffffff;
+    border-left: 6px solid #005bc4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.form-section h2 {
+    margin-top: 0;
+    color: #00428f;
+    border-bottom: 2px dashed #e1e9ff;
+    padding-bottom: 10px;
+}
+
+.card {
+    margin-top: 25px;
+    padding: 25px;
+    border: 1px solid #e1e9ff;
+    border-radius: 8px;
+    background: #fafcff;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    border: 1px solid #ccd6e0;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+    font-size: 15px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #005bc4;
+    box-shadow: 0 0 0 2px rgba(0, 91, 196, 0.1);
+}
+
+/* Angular validation classes integration */
+.form-control.ng-invalid.ng-touched {
+    border-color: #e53e3e;
+    background-color: #fffafb;
+}
+
+.form-control.ng-valid.ng-touched {
+    border-color: #38a169;
+}
+
+.nested-group {
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 6px;
+    position: relative;
+}
+
+.nested-group legend {
+    font-weight: 600;
+    color: #4a5568;
+    padding: 0 10px;
+    background: #fff;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background: #005bc4;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #004aa0;
+}
+
+.btn-primary:disabled {
+    background: #aabddc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    background: #718096;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #4a5568;
+}
+
+.btn-danger {
+    background: #e53e3e;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c53030;
+}
+
+.btn-sm {
+    padding: 8px 14px;
+    font-size: 13px;
+}
+
+.error {
+    color: #e53e3e;
+    font-size: 13px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+.explanation {
+    background: #f0f7ff;
+    border-left: 4px solid #3182ce;
+    padding: 18px;
+    border-radius: 6px;
+    margin-top: 25px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.explanation ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.explanation li {
+    margin-bottom: 6px;
+}
+
+.dynamic-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.flex-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-badge.valid {
+    background: #e6fffa;
+    color: #38a169;
+}
+
+.status-badge.invalid {
+    background: #fff5f5;
+    color: #e53e3e;
+}
+
+.mt-2 {
+    margin-top: 10px;
+}
+
+.mt-3 {
+    margin-top: 20px;
+}
+
+.desc {
+    font-size: 13.5px;
+    color: #718096;
+    margin-bottom: 12px;
+}
+
+.pending {
+    color: #dd6b20;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 500;
+    display: block;
+    margin-top: 6px;
+}

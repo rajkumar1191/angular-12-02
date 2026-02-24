@@ -1,0 +1,190 @@
+<div class="tutorial-container">
+    <h1>Forms Tutorial in Angular</h1>
+
+    <!-- ========================================== 
+       1. TEMPLATE DRIVEN FORMS 
+       ========================================== -->
+    <section class="form-section">
+        <h2>1. Template Driven Forms</h2>
+        <p>
+            <strong>Concept:</strong> Forms where the logic, validation, and layout are heavily defined in the HTML
+            template.
+            Angular automatically creates the form model based on the directives mapped to HTML elements (like
+            <code>ngModel</code>, <code>required</code>).
+            Best for simple, straightforward forms.
+        </p>
+
+        <div class="card">
+            <h3>Template Form Code Example</h3>
+            <!-- We expose ngForm to the local variable #tdForm -->
+            <form #tdForm="ngForm" (ngSubmit)="onSubmitTemplateDriven(tdForm)">
+
+                <!-- Field: Username -->
+                <div class="form-group">
+
+                    <label for="tdUsername">Username (ngModel):</label>
+                    <input type="text" id="tdUsername" name="username" [(ngModel)]="templateFormModel.username" required
+                        minlength="3" #tdUsername="ngModel" class="form-control">
+                        <!-- Feedback inside Template -->
+                    <div *ngIf="tdUsername.invalid && (tdUsername.dirty || tdUsername.touched)" class="error">
+                        <small *ngIf="tdUsername.errors?.['required']">Username is required.</small>
+                        <small *ngIf="tdUsername.errors?.['minlength']">Must be at least 3 characters long.</small>
+                    </div>
+                </div>
+                   
+                <!-- Field: Email -->
+                <div class="form-group">
+                    <label for="tdEmail">Email:</label>
+                    <input type="email" id="tdEmail" name="email" [(ngModel)]="templateFormModel.email" required email
+                        #tdEmail="ngModel" class="form-control">
+                    
+                        <div *ngIf="tdEmail.invalid && (tdEmail.dirty || tdEmail.touched)" class="error">
+                        <small *ngIf="tdEmail.errors?.['required']">Email is required.</small>
+                        <small *ngIf="tdEmail.errors?.['email']">Must be a valid email format.</small>
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="tdForm.invalid" class="btn btn-primary mt-2">Submit Template
+                    Form</button>
+            </form>
+
+
+            <div class="explanation">
+                <strong>Key Points (Template Driven):</strong>
+                <ul>
+                    <li><strong>ngModel:</strong> Used with two-way binding <code>[(ngModel)]="..."</code> to track
+                        inputs.</li>
+                    <li><strong>Validation:</strong> Relies on native HTML attributes (<code>required</code>,
+                        <code>minlength</code>, <code>email</code>). Angular provides validation directives behind them.
+                    </li>
+                    <li><strong>Form Reference:</strong> We export the form state using <code>#tdForm="ngForm"</code> to
+                        check properties like <code>tdForm.invalid</code>.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- ========================================== 
+       2. REACTIVE FORMS 
+       ========================================== -->
+    <section class="form-section">
+        <h2>2. Reactive Forms (Most Important)</h2>
+        <p>
+            <strong>Concept:</strong> Forms where the explicit structure, validation rules, and logic are defined in the
+            TypeScript component class. The template just binds to these programmable models.
+            Best for complex layouts, dynamic structure, and easy testability.
+        </p>
+
+        <!-- FormControl -->
+        <div class="card">
+            <h3>A. Standalone FormControl</h3>
+            <p>A <code>FormControl</code> tracks the value and validation status of an individual form control.</p>
+            <div class="form-group flex-group">
+                <input type="text" [formControl]="singleControl" class="form-control" style="max-width:300px;">
+                <span class="status-badge" [class.valid]="singleControl.valid" [class.invalid]="singleControl.invalid">
+                    Valid: {{ singleControl.valid }}
+                </span>
+            </div>
+        </div>
+
+        <!-- FormGroup & FormBuilder -->
+        <div class="card">
+            <h3>B. FormGroup, FormBuilder, and Validation</h3>
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmitReactive()">
+
+                <div class="form-group">
+                    <label for="rUsername">Username (Custom & Async Validation):</label>
+                    <input type="text" id="rUsername" formControlName="username" class="form-control">
+
+                    <div *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.touched"
+                        class="error">
+                        <small *ngIf="profileForm.get('username')?.errors?.['required']">Username is required. </small>
+                        <small *ngIf="profileForm.get('username')?.errors?.['minlength']">Minimum length is 4. </small>
+
+                        <!-- Custom Validator Error Display -->
+                        <small *ngIf="profileForm.get('username')?.errors?.['forbiddenName']">Name cannot be "bob"
+                            (Custom Validator). </small>
+
+                        <!-- Async Validator Error Display -->
+                        <small *ngIf="profileForm.get('username')?.errors?.['usernameTaken']">Username "admin" is
+                            already taken! (Async Validator). </small>
+                    </div>
+                    <small class="pending" *ngIf="profileForm.get('username')?.pending">Checking username
+                        availability... (Running Async Code)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="rEmail">Email:</label>
+                    <input type="email" id="rEmail" formControlName="email" class="form-control">
+                    <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="error">
+                        <small *ngIf="profileForm.get('email')?.errors?.['required']">Email is required.</small>
+                        <small *ngIf="profileForm.get('email')?.errors?.['email']">Enter a valid email address.</small>
+                    </div>
+                </div>
+
+                <!-- Cross-field Validation -->
+                <fieldset formGroupName="identities" class="form-group nested-group">
+                    <legend>Secret Identities (Cross-Field Validation)</legend>
+                    <p class="desc">The validator is attached to this subgroup. The Name and Alter Ego cannot be the
+                        exact same!</p>
+
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" formControlName="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Alter Ego:</label>
+                        <input type="text" formControlName="alterEgo" class="form-control">
+                    </div>
+                    <!-- Checking cross-field error on the nested group -->
+                    <div *ngIf="profileForm.get('identities')?.errors?.['identityRevealed']" class="error">
+                        <small>Cross-Field Error: Name and Alter Ego cannot be identical!</small>
+                    </div>
+                </fieldset>
+
+                <!-- Dynamic Forms with FormArray -->
+                <div class="form-group">
+                    <label>Aliases (FormArray - Dynamic forms):</label>
+                    <p class="desc"><code>FormArray</code> is used to manage an unknown number of controls dynamically
+                        during runtime.</p>
+
+                    <div formArrayName="aliases">
+                        <div *ngFor="let alias of aliases.controls; let i=index" class="dynamic-row">
+                            <input type="text" [formControlName]="i" class="form-control" placeholder="Alias {{i + 1}}">
+                            <button type="button" (click)="removeAlias(i)" class="btn btn-danger btn-sm">Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" (click)="addAlias()" class="btn btn-secondary btn-sm mt-2">+ Add
+                        Alias</button>
+                </div>
+
+                <div class="form-actions mt-3">
+                    <button type="submit" [disabled]="profileForm.invalid" class="btn btn-primary">Submit Reactive
+                        Form</button>
+                    <p *ngIf="profileForm.invalid" class="error mt-2">Form is invalid! Please fix errors to submit.</p>
+                </div>
+            </form>
+
+            <div class="explanation">
+                <strong>Key Points (Reactive Forms):</strong>
+                <ul>
+                    <li><strong>FormGroup:</strong> Tracks the value and validation status of a group of child
+                        FormControls.</li>
+                    <li><strong>FormBuilder:</strong> We inject `FormBuilder` to create controls array/groups concisely
+                        instead of calling `new FormGroup(...)`.</li>
+                    <li><strong>Custom Validator:</strong> Built a <code>forbiddenNameValidator</code> that marks "Bob"
+                        as invalid using a Regex.</li>
+                    <li><strong>Async Validator:</strong> Built <code>uniqueUsernameValidator</code> that returns an
+                        Observable, simulating an HTTP request to check "admin".</li>
+                    <li><strong>Cross-field validation:</strong> Applied a custom validator `identityRevealedValidator`
+                        at the FormGroup level to check interactions between siblings.</li>
+                    <li><strong>Dynamic Forms:</strong> Leveraged <code>FormArray</code> logic to push/remove alias
+                        controls dynamically with simple array methods.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</div>

@@ -6,10 +6,26 @@ import { Services } from '../components/services/services';
 import { LifecycleDemo } from '../components/lifecycle-demo/lifecycle-demo';
 import { AppHighlight } from './app-highlight';
 import { ReversePipe } from './reverse-pipe';
+import { FormsTutorial } from '../components/forms-tutorial/forms-tutorial';
+// import { ServicesTutorial } from '../components/services-tutorial/services-tutorial';
+// import { SignalsTutorial } from '../components/signals-tutorial/signals-tutorial';
+// import { RoutingTutorial } from '../components/routing-tutorial/routing-tutorial';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, About, Services, LifecycleDemo, CommonModule, AppHighlight, ReversePipe],
+  imports: [
+    RouterOutlet,
+    About,
+    Services,
+    LifecycleDemo,
+    FormsTutorial,
+    // ServicesTutorial,
+    // SignalsTutorial,
+    // RoutingTutorial,
+    CommonModule,
+    AppHighlight,
+    ReversePipe,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -20,7 +36,7 @@ export class App {
     { name: 'Angular', duration: '4 weeks' },
     { name: 'React', duration: '3 weeks' },
     { name: 'Vue', duration: '2 weeks' },
-  ]
+  ];
 
   date = new Date();
 
@@ -42,7 +58,7 @@ export class App {
   fontSize = 35;
 
   price = 100.25;
-  percentValue = .25;
+  percentValue = 0.25;
 
   name: any = 'Angular';
 
