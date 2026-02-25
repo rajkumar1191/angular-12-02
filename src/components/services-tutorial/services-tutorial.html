@@ -1,0 +1,108 @@
+<div class="tutorial-container">
+    <h1>Services & Dependency Injection in Angular</h1>
+
+    <!-- ==========================================
+       1. Auth Service Example (Singleton concept)
+       ========================================== -->
+    <section class="tut-section">
+        <h2>1. Singleton Real-World Demo (Auth Service)</h2>
+        <p class="desc">
+            The <code>AuthService</code> is <code>providedIn: 'root'</code>. This means Angular creates exactly ONE
+            instance
+            and injects that same instance anywhere it's demanded. This is crucial for global state like authentication.
+        </p>
+
+        <div class="card auth-card mt-3">
+            <h3>Authentication Status</h3>
+
+            <!-- Logged Out View -->
+            <div *ngIf="!authService.isAuthenticated">
+                <p class="status offline">🔴 Not Logged In</p>
+                <div class="flex-row">
+                    <input type="text" [(ngModel)]="usernameInput" placeholder="Enter username..."
+                        class="form-control me-2" style="max-width:250px;">
+                    <button (click)="handleLogin()" class="btn btn-primary" [disabled]="!usernameInput">Login</button>
+                </div>
+            </div>
+
+            <!-- Logged In View -->
+            <div *ngIf="authService.isAuthenticated">
+                <p class="status online">🟢 Logged in as: <strong>{{ authService.currentUser }}</strong></p>
+                <button (click)="handleLogout()" class="btn btn-warning">Logout</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+       2. API Service + Injection Token
+       ========================================== -->
+    <section class="tut-section">
+        <h2>2. API Service & Injection Tokens</h2>
+        <p class="desc">
+            Services often wrap <code>HttpClient</code> to fetch data. We injected the <code>API_BASE_URL</code> token
+            via the constructor.
+            Injection Tokens are perfect for providing configuration objects or primitive values.
+        </p>
+
+        <div class="card api-card mt-3">
+            <div class="url-config">
+                Configured Base URL Token: <code>{{ configUrl }}</code>
+            </div>
+
+            <button (click)="loadUsers()" class="btn btn-secondary mt-3" [disabled]="fetching">
+                {{ fetching ? 'Fetching Users...' : 'Fetch User Data' }}
+            </button>
+
+            <ul class="user-list mt-3" *ngIf="fetchedUsers.length > 0">
+                <li *ngFor="let user of fetchedUsers">
+                    🆔 {{ user.id }} | 👤 {{ user.name }}
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+       3. Shared State Service Example (RxJS BehaviorSubject)
+       ========================================== -->
+    <section class="tut-section">
+        <h2>3. Shared State Management</h2>
+        <p class="desc">
+            Because <code>SharedStateService</code> is a Root Singleton, we can use RxJS Observables (like
+            <code>BehaviorSubject</code>)
+            within it to synchronize data across totally unrelated components seamlessly. Here, we increment a counter.
+        </p>
+
+        <div class="card state-card mt-3 text-center">
+            <h3>Global Counter: <span class="badge">{{ sharedState.notificationCount$ | async }}</span></h3>
+            <div class="flex-row justify-center mt-3">
+                <button (click)="incrementCounter()" class="btn btn-success me-2">+ Increment Count</button>
+                <button (click)="resetCounter()" class="btn btn-danger">Reset</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+       4. DI Hierarchy & Component Level Services
+       ========================================== -->
+    <section class="tut-section">
+        <h2>4. Dependency Hierarchy (Non-Singletons)</h2>
+        <p class="desc">
+            Services don't <i>have</i> to be singletons. By declaring <code>providers: [LoggerService]</code> inside the
+            <code>@Component(...)</code> decorator of Child components, Angular creates a <b>brand new instance</b> of
+            that service
+            for every component initialized. Notice the Logger Instance IDs are different!
+        </p>
+
+        <div class="hierarchy-grid mt-3">
+            <!-- Child A -->
+            <app-service-child-a></app-service-child-a>
+
+            <!-- Child B -->
+            <app-service-child-b></app-service-child-b>
+        </div>
+    </section>
+
+</div>

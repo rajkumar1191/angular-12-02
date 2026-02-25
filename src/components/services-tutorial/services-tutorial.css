@@ -1,0 +1,268 @@
+.tutorial-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #fdfdfd;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    color: #2d3748;
+}
+
+h1 {
+    text-align: center;
+    color: #1a202c;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 15px;
+}
+
+.tut-section {
+    margin-top: 50px;
+}
+
+h2 {
+    color: #2b6cb0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.desc {
+    color: #4a5568;
+    font-size: 15px;
+    line-height: 1.6;
+    background: #ebf8ff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 5px solid #3182ce;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.auth-card {
+    border-top: 4px solid #ecc94b;
+}
+
+.api-card {
+    border-top: 4px solid #805ad5;
+}
+
+.state-card {
+    border-top: 4px solid #48bb78;
+}
+
+.status {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.offline {
+    background: #fff5f5;
+    color: #c53030;
+    border: 1px solid #feb2b2;
+}
+
+.online {
+    background: #f0fff4;
+    color: #276749;
+    border: 1px solid #9ae6b4;
+}
+
+.url-config {
+    background: #f7fafc;
+    padding: 10px 15px;
+    border: 1px dashed #cbd5e0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.url-config code {
+    color: #d53f8c;
+    font-weight: bold;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.me-2 {
+    margin-right: 10px;
+}
+
+.mt-2 {
+    margin-top: 10px;
+}
+
+.mt-3 {
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-control {
+    padding: 10px 15px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-control:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 1px #3182ce;
+}
+
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    color: white;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: #3182ce;
+}
+
+.btn-primary:hover {
+    background: #2b6cb0;
+}
+
+.btn-warning {
+    background: #dd6b20;
+}
+
+.btn-warning:hover {
+    background: #c05621;
+}
+
+.btn-secondary {
+    background: #805ad5;
+}
+
+.btn-secondary:hover {
+    background: #6b46c1;
+}
+
+.btn-success {
+    background: #38a169;
+}
+
+.btn-success:hover {
+    background: #2f855a;
+}
+
+.btn-danger {
+    background: #e53e3e;
+}
+
+.btn-danger:hover {
+    background: #c53030;
+}
+
+.btn-outline {
+    background: white;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+}
+
+.btn-outline:hover {
+    background: #edf2f7;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.user-list {
+    list-style-type: none;
+    padding: 0;
+    background: #f7fafc;
+    border-radius: 6px;
+    border: 1px solid #edf2f7;
+}
+
+.user-list li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.user-list li:last-child {
+    border-bottom: none;
+}
+
+.badge {
+    background: #2b6cb0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.hierarchy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.child-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed #a0aec0;
+}
+
+.child-a {
+    border-color: #eb4d4b;
+    background: #fffcfc;
+}
+
+.child-b {
+    border-color: #686de0;
+    background: #fcffff;
+}
+
+.child-card h4 {
+    margin-top: 0;
+    color: #2d3748;
+}
+
+.child-card ul {
+    background: white;
+    padding: 10px 10px 10px 30px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    margin-top: 15px;
+    min-height: 40px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #4a5568;
+}

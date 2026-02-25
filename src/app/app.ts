@@ -7,7 +7,7 @@ import { LifecycleDemo } from '../components/lifecycle-demo/lifecycle-demo';
 import { AppHighlight } from './app-highlight';
 import { ReversePipe } from './reverse-pipe';
 import { FormsTutorial } from '../components/forms-tutorial/forms-tutorial';
-// import { ServicesTutorial } from '../components/services-tutorial/services-tutorial';
+import { ServicesTutorial } from '../components/services-tutorial/services-tutorial';
 // import { SignalsTutorial } from '../components/signals-tutorial/signals-tutorial';
 // import { RoutingTutorial } from '../components/routing-tutorial/routing-tutorial';
 
@@ -19,7 +19,7 @@ import { FormsTutorial } from '../components/forms-tutorial/forms-tutorial';
     Services,
     LifecycleDemo,
     FormsTutorial,
-    // ServicesTutorial,
+    ServicesTutorial,
     // SignalsTutorial,
     // RoutingTutorial,
     CommonModule,
