@@ -1,0 +1,88 @@
+<div class="tutorial-container">
+  <h1>HTTP Interceptors & Standard API Service</h1>
+  <p class="subtitle">Proper API Service Architecture & Interceptor Usage</p>
+
+  <section class="tut-section">
+    <h2>1. The <code>ApiService</code> Wrapper</h2>
+    <p class="desc">
+      We created <code>ApiServiceCore</code> inside <code>src/core/http</code> to standardize all
+      API traffic. It enforces a base URL, handles generic params automatically, and abstracts away
+      repeating `this.http.get` logic.
+    </p>
+
+    <div class="card api-actions-card mt-3">
+      <div class="flex-row">
+        <button class="btn btn-primary me-2" (click)="loadData()" [disabled]="loading">
+          {{ loading ? 'Loading...' : 'GET 3 Posts' }}
+        </button>
+        <button class="btn btn-success" (click)="createData()">POST New Item</button>
+      </div>
+
+      <!-- Result Boxes -->
+      @if (posts().length > 0) {
+        <div class="data-box mt-3">
+          @for (p of posts(); track $index) {
+            <div class="post-item">
+              <strong>#{{ p.id }} {{ p.title }}</strong>
+            </div>
+          }
+        </div>
+      }
+      @if (postResponse) {
+        <div class="success-box mt-3">Payload Sent! Received: {{ postResponse | json }}</div>
+      }
+    </div>
+  </section>
+
+  <!-- ==========================================
+       2. INTERCEPTORS
+       ========================================== -->
+  <section class="tut-section">
+    <h2>2. HTTP Interceptors (Angular v15+ Functional)</h2>
+    <p class="desc">
+      Two interceptors are registered in <code>app.config.ts</code> utilizing
+      <code>provideHttpClient(withInterceptors(...))</code>:
+    </p>
+
+    <div class="interceptor-grid mt-3">
+      <!-- Auth Interceptor Demo -->
+      <div class="card auth-int-card">
+        <h3>🛡️ Auth Interceptor</h3>
+        <p class="small">
+          If authenticated, it clones every outgoing request and injects an
+          <code>Authorization: Bearer Token</code> header.
+        </p>
+
+        <div class="mt-2 status-panel">
+          Status:
+          <strong>{{ authService.isAuthenticated ? 'Logged In 🟢' : 'Logged Out 🔴' }}</strong
+          ><br />
+          <button class="btn btn-sm btn-outline mt-2" (click)="toggleLogin()">
+            {{ authService.isAuthenticated ? 'Logout' : 'Login Fake User' }}
+          </button>
+        </div>
+        <p class="small mt-2 text-muted">
+          <em>Tip: Login, hit "GET Posts" above, and check your browser's Network Tab Headers!</em>
+        </p>
+      </div>
+
+      <!-- Error Interceptor Demo -->
+      <div class="card err-int-card">
+        <h3>🚨 Global Error Interceptor</h3>
+        <p class="small">
+          Catches any HTTP failure (404, 500) application-wide, logs it consistently, and normalizes
+          the error message.
+        </p>
+
+        <button class="btn btn-sm btn-danger mt-3" (click)="triggerErrorResponse()">
+          Trigger 404 Error Call
+        </button>
+
+        <div class="error-box mt-3" *ngIf="errorMsg">
+          <strong>Intercepted Error:</strong><br />
+          {{ errorMsg }}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

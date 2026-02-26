@@ -8,24 +8,13 @@ import { AppHighlight } from './app-highlight';
 import { ReversePipe } from './reverse-pipe';
 import { FormsTutorial } from '../components/forms-tutorial/forms-tutorial';
 import { ServicesTutorial } from '../components/services-tutorial/services-tutorial';
-// import { SignalsTutorial } from '../components/signals-tutorial/signals-tutorial';
-// import { RoutingTutorial } from '../components/routing-tutorial/routing-tutorial';
+import { SignalsTutorial } from '../components/signals-tutorial/signals-tutorial';
+import { RoutingTutorial } from '../components/routing-tutorial/routing-tutorial';
+import { HttpTutorial } from '../components/http-tutorial/http-tutorial';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    About,
-    Services,
-    LifecycleDemo,
-    FormsTutorial,
-    ServicesTutorial,
-    // SignalsTutorial,
-    // RoutingTutorial,
-    CommonModule,
-    AppHighlight,
-    ReversePipe,
-  ],
+  imports: [RouterOutlet, About, Services, LifecycleDemo, FormsTutorial, ServicesTutorial, SignalsTutorial, RoutingTutorial, HttpTutorial, CommonModule, AppHighlight, ReversePipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
