@@ -1,0 +1,57 @@
+<div class="tutorial-container">
+    <h1>Routing & Guards in Angular</h1>
+    <p class="subtitle">Navigation, Lazy Loading, and CanActivate Route Protection</p>
+
+    <section class="tut-section">
+        <h2>1. Route Testing & Authentication</h2>
+        <p class="desc">
+            Try navigating to the protected routes. Because of the <code>authGuard</code>, you'll be blocked unless you
+            log in.
+            The <strong>Admin Panel</strong> specifically checks if the current user is "admin" using route
+            <code>data</code>.
+        </p>
+
+        <!-- Quick Auth Panel for Testing -->
+        <div class="card auth-test-card mt-3">
+            <h4>Auth Status Simulator</h4>
+
+            <div class="flex-row mt-2" *ngIf="!authService.isAuthenticated">
+                <span class="status-badge offline">🔴 Logged Out</span>
+                <button class="btn btn-sm btn-outline me-2 ms-4" (click)="loginAsUser()">Login as standard
+                    'user'</button>
+                <button class="btn btn-sm btn-danger outline-red" (click)="loginAsAdmin()">Login as 'admin'</button>
+            </div>
+
+            <div class="flex-row mt-2" *ngIf="authService.isAuthenticated">
+                <span class="status-badge online">🟢 Logged in as: {{ authService.currentUser }}</span>
+                <button class="btn btn-sm btn-warning ms-4" (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       2. NAVIGATION MENU
+       ========================================== -->
+    <section class="tut-section">
+        <h2>2. App Navigation (<code>RouterLink</code>)</h2>
+        <p class="desc">
+            Below is a navbar built with <code>RouterLink</code>. When a link is clicked, Angular intercepts it and
+            dynamically loads the component inside the <code>&lt;router-outlet /&gt;</code> at the bottom of the page.
+        </p>
+
+        <nav class="routing-nav mt-3">
+            <!-- Normal Route (Eager Loaded) -->
+            <a routerLink="/home" routerLinkActive="active-link" class="nav-link">🏠 Home (Public)</a>
+
+            <!-- Parameterized Route (Lazy Loaded) -->
+            <!-- Passing a path parameter /dashboard/99 -->
+            <a routerLink="/dashboard/99" routerLinkActive="active-link" class="nav-link">📊 Dashboard (Requires
+                Auth)</a>
+
+            <!-- Admin Route (Lazy Loaded & High Guard) -->
+            <a routerLink="/admin" routerLinkActive="active-link" class="nav-link">🛡️ Admin Panel (Requires
+                'admin')</a>
+        </nav>
+    </section>
+
+</div>
