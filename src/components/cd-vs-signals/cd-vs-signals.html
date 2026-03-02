@@ -1,0 +1,77 @@
+<div class="tutorial-container">
+    <h1>Change Detection vs. Signals</h1>
+    <p class="subtitle">Zone.js Tree-Walking vs. Fine-Grained Reactivity</p>
+
+    <div class="row-grid mt-4">
+        <!-- Traditional Change Detection Card -->
+        <div class="card traditional-card">
+            <div class="card-header">
+                <h3>🌳 Traditional (Zone.js)</h3>
+            </div>
+            <div class="card-body">
+                <p class="desc-text text-muted">
+                    Angular patches browser events (clicks, timers, XHR). When an event occurs, Angular walks the
+                    <strong>entire component tree</strong> from top to bottom, checking if any bound properties changed.
+                </p>
+
+                <div class="counter-box">
+                    <p class="huge-num">{{ traditionalValue }}</p>
+                    <button class="btn btn-blue" (click)="updateTraditional()">Update Traditional</button>
+                </div>
+
+                <div class="use-cases mt-4">
+                    <h4>Use Cases:</h4>
+                    <ul>
+                        <li>Legacy codebases.</li>
+                        <li>Simple apps where performance isn't a bottleneck.</li>
+                        <li>When you rely heavily on RxJS <code>async</code> pipe (which manages CD for you).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signals Card -->
+        <div class="card signals-card">
+            <div class="card-header">
+                <h3>🎯 Signals (Fine-Grained)</h3>
+            </div>
+            <div class="card-body">
+                <p class="desc-text text-muted">
+                    Signals create a <strong>direct dependency graph</strong>. When a Signal changes, Angular knows
+                    <em>exactly</em> which specific view needs updating, without checking unrelated components. This
+                    paves the way for <strong>Zoneless</strong> Angular.
+                </p>
+
+                <div class="counter-box">
+                    <p class="huge-num">{{ signalValue() }}</p>
+                    <button class="btn btn-green" (click)="updateSignal()">Update Signal</button>
+                </div>
+
+                <div class="use-cases mt-4">
+                    <h4>Use Cases:</h4>
+                    <ul>
+                        <li>Modern Angular 16+ apps.</li>
+                        <li>Highly interactive or data-heavy views (dashboards).</li>
+                        <li>Local component state and deeply nested components using <code>compute()</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deep Dive Explanation -->
+    <section class="deep-dive mt-4">
+        <h2>The "Outside Angular" Test</h2>
+        <p>
+            Zone.js tracks events. What happens if data arrives from a source Angular <em>doesn't</em> patch, or if we
+            deliberately run it outside Angular to simulate third-party non-Angular libraries?
+        </p>
+
+        <div class="flex-row align-center gap-15 mt-3">
+            <button class="btn btn-dark" (click)="simulateAsyncOutsideZone()">Simulate Timeout outside Zone.js</button>
+            <span class="text-sm">Click this button. Both values update internally after 1 sec.<br /><b>Notice:</b>
+                Without Zone.js, the traditional UI does not update until a later click forces a check!</span>
+        </div>
+    </section>
+
+</div>

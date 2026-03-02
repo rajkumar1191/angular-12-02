@@ -1,0 +1,172 @@
+<div class="tutorial-container">
+  <h1>Signals & Deferrable Views in Angular</h1>
+  <p class="subtitle">Modern Reactivity using Angular v17+ Features</p>
+
+  <!-- ==========================================
+       1. BASIC & COMPUTED SIGNALS
+       ========================================== -->
+  <section class="tut-section">
+    <h2>1. Signals (<code>signal()</code> & <code>computed()</code>)</h2>
+    <p class="desc">
+      Signals represent state in Angular. A writable <code>signal</code> can be modified, while a
+      <code>computed</code> signal automatically derives its value based on other signals without
+      manual subscriptions.
+    </p>
+
+    <div class="card signal-card mt-3">
+      <div class="flex-row">
+        <label>First Name: </label>
+        <input
+          type="text"
+          [ngModel]="firstName()"
+          (ngModelChange)="firstName.set($event)"
+          class="form-control me-2"
+          style="max-width: 150px"
+        />
+        <label>Last Name: </label>
+        <input
+          type="text"
+          [ngModel]="lastName()"
+          (ngModelChange)="lastName.set($event)"
+          class="form-control"
+          style="max-width: 150px"
+        />
+      </div>
+
+      <div class="result-box mt-3">
+        Computed Full Name: <strong>{{ fullName() }}</strong>
+      </div>
+
+      <hr class="mt-3 mb-3" />
+
+      <div class="flex-row">
+        <button (click)="incrementQty()" class="btn btn-secondary me-2">+ Add Item</button>
+        <span
+          >Quantity: <strong>{{ quantity() }}</strong> | Price: $19.99</span
+        >
+      </div>
+      <div class="result-box mt-3 success-box">
+        Computed Total Cost: <strong>${{ totalCost() | number: '1.2-2' }}</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       2. SIGNAL EFFECTS
+       ========================================== -->
+  <section class="tut-section">
+    <h2>2. Effects (<code>effect()</code>)</h2>
+    <p class="desc">
+      An <code>effect</code> executes a side-effect function whenever one of the signals it reads
+      changes. It is perfect for syncing data, logging, or interacting with non-Angular libraries.
+      Play with the values above to trigger it!
+    </p>
+
+    <div class="card effect-card mt-3">
+      <h4>Effect Execution Logs</h4>
+      <div class="log-console">
+        <p *ngFor="let log of effectLogs" class="log-item">{{ log }}</p>
+        <p *ngIf="effectLogs.length === 0" class="log-placeholder">waiting for signal changes...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       3. SIGNAL INPUTS, OUTPUTS, & MODELS
+       ========================================== -->
+  <section class="tut-section">
+    <h2>3. Component Communication (v17+)</h2>
+    <p class="desc">
+      Angular now provides <code>input()</code>, <code>output()</code>, and
+      <code>model()</code> functions to replace decorators (<code>@Input</code>,
+      <code>@Output</code>). A <code>model()</code> provides native two-way binding via signals!
+    </p>
+
+    <div class="card sync-card mt-3">
+      <h3>Parent Component</h3>
+      <div class="flex-row justify-between mb-2">
+        <div>
+          <label>Parent Message (Input to Child):</label>
+          <input
+            type="text"
+            [ngModel]="parentMessage()"
+            (ngModelChange)="parentMessage.set($event)"
+            class="form-control mt-1"
+          />
+        </div>
+
+        <div>
+          <label>Two-Way Bound Counter (Model):</label>
+          <div class="flex-row mt-1">
+            <button (click)="sharedCounter.set(sharedCounter() - 1)" class="btn btn-sm btn-outline">
+              -
+            </button>
+            <span class="count-display">{{ sharedCounter() }}</span>
+            <button (click)="sharedCounter.set(sharedCounter() + 1)" class="btn btn-sm btn-outline">
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="status-box">
+        Last Ping from Child: <strong>{{ lastPingFromChild() }}</strong>
+      </p>
+
+      <hr />
+
+      <!-- Rendering the Child with modern signal binding -->
+      <app-signal-child
+        [message]="parentMessage()"
+        [(countValue)]="sharedCounter"
+        (onPing)="handleChildPing($event)"
+      >
+      </app-signal-child>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       4. DEFERRABLE VIEWS (@defer)
+       ========================================== -->
+  <section class="tut-section">
+    <h2>4. Deferrable Views (<code>\&#64;defer</code>)</h2>
+    <p class="desc">
+      Deferrable views allow you to lazily load portions of the UI (and the components they rely on)
+      declaratively right in the template! This drastically reduces the initial bundle size. Let's
+      load the to-do list below lazily.
+    </p>
+
+    <div class="card defer-card mt-3 text-center">
+      <!-- We defer loading this section until it becomes visible in the viewport -->
+      @defer (on viewport) {
+        <div class="todo-app text-left">
+          <h3 class="mb-2">Lazily Loaded Todo List</h3>
+          <p>
+            Pending tasks (Computed): <strong>{{ pendingTodosCount() }}</strong>
+          </p>
+
+          <ul class="todo-list mt-2">
+            <li
+              *ngFor="let todo of todos()"
+              [class.completed]="todo.done"
+              (click)="toggleTodo(todo.id)"
+            >
+              <input type="checkbox" [checked]="todo.done" /> {{ todo.text }}
+            </li>
+          </ul>
+          <p class="small text-muted mt-2">
+            This entire section and its dependencies were downloaded only when you scrolled to it!
+          </p>
+        </div>
+      } @placeholder {
+        <div class="placeholder-box">
+          <p>Scroll down to load this section...</p>
+        </div>
+      } @loading {
+        <div class="loading-box">
+          <p>Downloading chunk...</p>
+        </div>
+      }
+    </div>
+  </section>
+</div>

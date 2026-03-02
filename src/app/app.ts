@@ -11,10 +11,12 @@ import { ServicesTutorial } from '../components/services-tutorial/services-tutor
 import { SignalsTutorial } from '../components/signals-tutorial/signals-tutorial';
 import { RoutingTutorial } from '../components/routing-tutorial/routing-tutorial';
 import { HttpTutorial } from '../components/http-tutorial/http-tutorial';
+import { RxjsTutorial } from '../components/rxjs-tutorial/rxjs-tutorial';
+import { CdVsSignals } from '../components/cd-vs-signals/cd-vs-signals';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, About, Services, LifecycleDemo, FormsTutorial, ServicesTutorial, SignalsTutorial, RoutingTutorial, HttpTutorial, CommonModule, AppHighlight, ReversePipe],
+  imports: [RouterOutlet, About, Services, LifecycleDemo, FormsTutorial, ServicesTutorial, SignalsTutorial, RoutingTutorial, HttpTutorial, RxjsTutorial, CdVsSignals, CommonModule, AppHighlight, ReversePipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

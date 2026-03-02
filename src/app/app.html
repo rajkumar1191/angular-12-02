@@ -1,20 +1,18 @@
-<h1>{{ title() | uppercase}}</h1>
-<h1>{{ title() | lowercase}}</h1>
-<h1>{{ title() | titlecase}}</h1>
-<h4 class="date-cls" appAppHighlight="lightblue">{{ date | date:'dd-MMM-yyyy' }}</h4>
+<h1>{{ title() | uppercase }}</h1>
+<h1>{{ title() | lowercase }}</h1>
+<h1>{{ title() | titlecase }}</h1>
+<h4 class="date-cls" appAppHighlight="lightblue">{{ date | date: 'dd-MMM-yyyy' }}</h4>
 
-<p>Price: {{ price | currency:'USD' }}</p>
-<p>Price: {{ price | currency:'EUR' }}</p>
-<p>Price: {{ price | currency:'INR' }}</p>
+<p>Price: {{ price | currency: 'USD' }}</p>
+<p>Price: {{ price | currency: 'EUR' }}</p>
+<p>Price: {{ price | currency: 'INR' }}</p>
 
-<p>Name: {{ name | slice:0:3 }} </p>
+<p>Name: {{ name | slice: 0 : 3 }}</p>
 <p>Percentage: {{ percentValue | percent }}</p>
 
 <span>{{ jsonData | json }}</span>
 
 <p>Reversed Name: {{ name | reverse }}</p>
-
-
 
 <button (click)="handleClickEvent()">Click here</button>
 <img [src]="imgSrc" alt="Bg Img" />
@@ -35,7 +33,7 @@
   }
 
   @for (item of course; track item.name) {
-  <p style="font-size: 1.2rem; font-weight: 400;">{{ item.name }} - {{ item.duration }}</p>
+  <p style="font-size: 1.2rem; font-weight: 400">{{ item.name }} - {{ item.duration }}</p>
   }
 
   @switch (date.getDay()) {
@@ -60,13 +58,16 @@
 <hr />
 
 <app-http-tutorial></app-http-tutorial>
-<!-- <app-signals-tutorial></app-signals-tutorial> -->
+<hr />
+<app-cd-vs-signals></app-cd-vs-signals>
+<hr />
+<app-signals-tutorial></app-signals-tutorial>
 <hr />
 <app-routing-tutorial></app-routing-tutorial>
 <hr />
-
+<app-rxjs-tutorial></app-rxjs-tutorial>
 <hr />
-<div class="router-container" style="padding: 20px; background: #fdfdfd; border-radius: 8px; margin-top:20px;">
+<div class="router-container" style="padding: 20px; background: #fdfdfd; border-radius: 8px; margin-top: 20px">
   <h2>Active Route View</h2>
   <router-outlet />
 </div>
