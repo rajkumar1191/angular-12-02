@@ -1,0 +1,126 @@
+<div class="tutorial-container">
+    <h1>Advanced RxJS Operations</h1>
+    <p class="subtitle">Mastering Asynchronous Data Streams in Angular</p>
+
+    <!-- ==========================================
+       1. MAPPING OPERATORS
+       ========================================== -->
+    <section class="tut-section">
+        <h2>1. Higher-Order Mapping Operators</h2>
+        <p class="desc">
+            When an inner Observable is returned inside an outer stream we need a "flattening" operator. The four core
+            flattening operators dictate <strong>how concurrency</strong> is handled.
+        </p>
+
+        <div class="card map-card mt-3">
+            <div class="operator-grid">
+
+                <div class="op-panel">
+                    <h3><code>switchMap</code></h3>
+                    <p class="small text-muted">Cancels the previous request if a new one arrives. Best for
+                        Search/Typeahead.</p>
+                    <button class="btn btn-primary btn-sm" (click)="triggerMap('switch')">Trigger SwitchMap</button>
+                </div>
+
+                <div class="op-panel">
+                    <h3><code>mergeMap</code></h3>
+                    <p class="small text-muted">Runs all inner streams in parallel concurrently. Best for disjoint bulk
+                        saves.</p>
+                    <button class="btn btn-secondary btn-sm" (click)="triggerMap('merge')">Trigger MergeMap</button>
+                </div>
+
+                <div class="op-panel">
+                    <h3><code>concatMap</code></h3>
+                    <p class="small text-muted">Queues requests sequentially, waiting for one to finish before starting
+                        the next.</p>
+                    <button class="btn btn-success btn-sm" (click)="triggerMap('concat')">Trigger ConcatMap</button>
+                </div>
+
+                <div class="op-panel">
+                    <h3><code>exhaustMap</code></h3>
+                    <p class="small text-muted">Ignores all new requests while a current request is pending. Best for
+                        Login buttons to prevent spam.</p>
+                    <button class="btn btn-warning btn-sm" (click)="triggerMap('exhaust')">Trigger ExhaustMap</button>
+                </div>
+
+            </div>
+
+            <!-- Mapping Logs -->
+            <div class="log-console mt-3">
+                <p *ngFor="let log of mapLogs" class="log-item">{{ log }}</p>
+                <p *ngIf="!mapLogs.length" class="log-placeholder">Click any button multiple times rapidly to see
+                    concurrency rules applied...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       2. FILTERING OPERATORS
+       ========================================== -->
+    <section class="tut-section">
+        <h2>2. Filtering Operators (Smart Search)</h2>
+        <p class="desc">
+            Operators like <code>debounceTime</code> and <code>distinctUntilChanged</code> prevent flooding APIs with
+            unnecessary requests while a user types.
+        </p>
+
+        <div class="card filter-card mt-3">
+            <label>Search Query: </label>
+            <input class="form-control mt-2" type="text" [ngModel]="searchInput"
+                (ngModelChange)="onSearchChange($event)" placeholder="Type quickly...">
+            <p class="small text-muted mt-2 mb-0">Will only hit API if you pause for 500ms, and if the value actually
+                changed.</p>
+
+            <div class="list-logs mt-3">
+                <div *ngFor="let log of searchLogs" class="list-item search-item">
+                    {{ log }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       3. COMBINATION OPERATORS
+       ========================================== -->
+    <section class="tut-section">
+        <h2>3. Combination Operators</h2>
+        <p class="desc">
+            Used when you need to execute multiple Observables and merge their outputs.
+        </p>
+
+        <div class="card combo-card mt-3">
+            <div class="flex-row gap-10 combo-actions">
+                <button class="btn btn-outline" (click)="runForkJoin()">Run <code>forkJoin</code></button>
+                <button class="btn btn-outline" (click)="runCombineLatest()">Run <code>combineLatest</code></button>
+                <button class="btn btn-outline" (click)="runMerge()">Run <code>merge</code></button>
+            </div>
+
+            <div class="log-console mt-3">
+                <p *ngFor="let log of combineLogs" class="log-item">{{ log }}</p>
+                <p *ngIf="!combineLogs.length" class="log-placeholder">Awaiting trigger...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+       4. ERROR HANDLING
+       ========================================== -->
+    <section class="tut-section">
+        <h2>4. Error Handling</h2>
+        <p class="desc">
+            Safely recovering from RxJS errors prevents the entire subscriber stream from dying permanently.
+        </p>
+
+        <div class="card error-card mt-3">
+            <div class="flex-row gap-10">
+                <button class="btn btn-danger" (click)="runCatchError()">Demo <code>catchError</code> Fallback</button>
+                <button class="btn btn-danger outline-red" (click)="runRetry()">Demo <code>retry(2)</code></button>
+            </div>
+
+            <ul class="error-logs mt-3">
+                <li *ngFor="let log of errorLogs">{{ log }}</li>
+                <li *ngIf="!errorLogs.length" class="text-muted small italic">Awaiting trigger...</li>
+            </ul>
+        </div>
+    </section>
+</div>
