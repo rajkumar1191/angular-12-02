@@ -29,26 +29,26 @@
   <button (click)="updateLifecycleData()" [disabled]="!showLifecycle">Update Data</button>
 
   @if (showLifecycle) {
-  <app-lifecycle-demo [data]="lifecycleData" (reset)="resetData($event)"> </app-lifecycle-demo>
+    <app-lifecycle-demo [data]="lifecycleData" (reset)="resetData($event)"> </app-lifecycle-demo>
   }
 
   @for (item of course; track item.name) {
-  <p style="font-size: 1.2rem; font-weight: 400">{{ item.name }} - {{ item.duration }}</p>
+    <p style="font-size: 1.2rem; font-weight: 400">{{ item.name }} - {{ item.duration }}</p>
   }
 
   @switch (date.getDay()) {
-  @case (0) {
-  <p>Today is Sunday</p>
-  }
-  @case (4) {
-  <p [ngStyle]="{ color: themeColor, 'font-size': fontSize + 'px' }">Today is Thursday</p>
-  }
-  @case (6) {
-  <p>Today is Saturday</p>
-  }
-  @default {
-  <p>Today is a weekday</p>
-  }
+    @case (0) {
+      <p>Today is Sunday</p>
+    }
+    @case (4) {
+      <p [ngStyle]="{ color: themeColor, 'font-size': fontSize + 'px' }">Today is Thursday</p>
+    }
+    @case (6) {
+      <p>Today is Saturday</p>
+    }
+    @default {
+      <p>Today is a weekday</p>
+    }
   }
 </div>
 <hr />
@@ -67,7 +67,26 @@
 <hr />
 <app-rxjs-tutorial></app-rxjs-tutorial>
 <hr />
-<div class="router-container" style="padding: 20px; background: #fdfdfd; border-radius: 8px; margin-top: 20px">
+<h3>Current Count: <span class="highlight">{{ count() }}</span></h3>
+<div style="margin-bottom: 20px">
+  <a
+    routerLink="/ngrx-tutorial"
+    style="
+      display: inline-block;
+      padding: 10px 20px;
+      background: #805ad5;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    "
+    >Go to NgRx Tutorial ➡️</a
+  >
+</div>
+<div
+  class="router-container"
+  style="padding: 20px; background: #fdfdfd; border-radius: 8px; margin-top: 20px"
+>
   <h2>Active Route View</h2>
   <router-outlet />
 </div>

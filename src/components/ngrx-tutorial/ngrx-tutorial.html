@@ -1,0 +1,70 @@
+<div class="tutorial-container">
+    <div class="header">
+        <h1>NgRx State Management</h1>
+        <p>Understanding Store, Actions, Reducers, Selectors, and Effects.</p>
+    </div>
+
+    <div class="demo-section">
+        <h2>Counter Demo (Powered by NgRx)</h2>
+
+        <div class="counter-display card">
+            <!-- We can use the signal value directly without the async pipe! -->
+            <h3>Current Count: <span class="highlight">{{ count() }}</span></h3>
+
+            @if (loading()) {
+            <p class="status-msg loading">Loading mock data from server...</p>
+            }
+            @if (error()) {
+            <p class="status-msg error">Error: {{ error() }}</p>
+            }
+
+            <div class="actions">
+                <button class="btn primary" (click)="increment()" [disabled]="loading()">Increment (+)</button>
+                <button class="btn secondary" (click)="decrement()" [disabled]="loading()">Decrement (-)</button>
+                <button class="btn danger" (click)="reset()" [disabled]="loading()">Reset (0)</button>
+                <button class="btn async" (click)="loadAsync()" [disabled]="loading()">Load Async Data</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="explanation-section">
+        <h2>How NgRx Works in Angular</h2>
+
+        <div class="concept-card">
+            <h3>1. Store (The Single Source of Truth)</h3>
+            <p>The <strong>Store</strong> holds the global state of your application. Think of it as a local database
+                for your Angular app. Components don't hold global state; they read it from the Store, ensuring a
+                predictable flow.</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>2. Actions (Describing Events)</h3>
+            <p><strong>Actions</strong> express unique events that happen in your application (e.g., "User clicked
+                Increment" or "Failed to load data"). Components dispatch Actions to the Store instead of mutating state
+                directly.</p>
+            <pre><code>this.store.dispatch(increment());</code></pre>
+        </div>
+
+        <div class="concept-card">
+            <h3>3. Reducers (Handling State Changes)</h3>
+            <p><strong>Reducers</strong> are pure functions that take the current state and the latest action to compute
+                a new state. They are the <em>only</em> way to change the store's state.</p>
+            <pre><code>on(increment, (state) => (&#123; ...state, count: state.count + 1 &#125;))</code></pre>
+        </div>
+
+        <div class="concept-card">
+            <h3>4. Selectors (Reading Specific State)</h3>
+            <p><strong>Selectors</strong> extract specific pieces of data from the Store. They act as queries and can
+                memoize (cache) results for performance. In modern Angular 16+, we can read them natively as
+                <strong>Signals</strong>:</p>
+            <pre><code>count = this.store.selectSignal(selectCount);</code></pre>
+        </div>
+
+        <div class="concept-card">
+            <h3>5. Effects (Handling Side Effects)</h3>
+            <p><strong>Effects</strong> listen for Actions and perform side operations like HTTP requests. Upon
+                completion, they dispatch a <em>new</em> Action (Success or Failure) back to the Store, which a Reducer
+                then handles. This isolates API calls from your UI components.</p>
+        </div>
+    </div>
+</div>

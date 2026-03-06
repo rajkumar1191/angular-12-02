@@ -7,6 +7,12 @@ export const routes: Routes = [
   // 1. Standard Eagerly Loaded Route
   { path: 'home', component: RouteHomeComponent },
 
+  // Tutorial Routes
+  {
+    path: 'ngrx-tutorial',
+    loadComponent: () => import('../components/ngrx-tutorial/ngrx-tutorial').then(c => c.NgrxTutorial)
+  },
+
   // 2. Auth Guard Protected Route + Parameterized Route
   {
     path: 'dashboard/:id',

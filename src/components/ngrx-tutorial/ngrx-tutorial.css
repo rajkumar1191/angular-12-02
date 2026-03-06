@@ -1,0 +1,161 @@
+.tutorial-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #333;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: #4a5568;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.demo-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 3rem;
+    border: 1px solid #e2e8f0;
+}
+
+.demo-section h2 {
+    color: #2b6cb0;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 0.5rem;
+}
+
+.counter-display {
+    text-align: center;
+    padding: 2rem;
+    background: #f7fafc;
+    border-radius: 8px;
+    border: 1px dashed #cbd5e0;
+}
+
+.counter-display h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+}
+
+.highlight {
+    color: #e53e3e;
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.primary {
+    background: #3182ce;
+    color: white;
+}
+
+.primary:hover:not(:disabled) {
+    background: #2b6cb0;
+}
+
+.secondary {
+    background: #718096;
+    color: white;
+}
+
+.secondary:hover:not(:disabled) {
+    background: #4a5568;
+}
+
+.danger {
+    background: #e53e3e;
+    color: white;
+}
+
+.danger:hover:not(:disabled) {
+    background: #c53030;
+}
+
+.async {
+    background: #805ad5;
+    color: white;
+}
+
+.async:hover:not(:disabled) {
+    background: #6b46c1;
+}
+
+.status-msg {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.loading {
+    color: #805ad5;
+}
+
+.error {
+    color: #e53e3e;
+}
+
+.explanation-section h2 {
+    color: #2b6cb0;
+    margin-bottom: 1.5rem;
+}
+
+.concept-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #3182ce;
+}
+
+.concept-card h3 {
+    color: #2d3748;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.concept-card p {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.concept-card pre {
+    background: #f7fafc;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    color: #2d3748;
+    font-size: 0.9rem;
+}

@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { About } from '../components/about/about';
 import { Services } from '../components/services/services';
 import { LifecycleDemo } from '../components/lifecycle-demo/lifecycle-demo';
@@ -13,16 +13,19 @@ import { RoutingTutorial } from '../components/routing-tutorial/routing-tutorial
 import { HttpTutorial } from '../components/http-tutorial/http-tutorial';
 import { RxjsTutorial } from '../components/rxjs-tutorial/rxjs-tutorial';
 import { CdVsSignals } from '../components/cd-vs-signals/cd-vs-signals';
+import { selectCount } from '../state/counter/counter.selectors';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, About, Services, LifecycleDemo, FormsTutorial, ServicesTutorial, SignalsTutorial, RoutingTutorial, HttpTutorial, RxjsTutorial, CdVsSignals, CommonModule, AppHighlight, ReversePipe],
+  imports: [RouterOutlet, About, Services, LifecycleDemo, FormsTutorial, ServicesTutorial, SignalsTutorial, RoutingTutorial, HttpTutorial, RxjsTutorial, CdVsSignals, CommonModule, AppHighlight, ReversePipe, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
+  private store = inject(Store);
   protected readonly title = signal('angular app new');
-
+count = this.store.selectSignal(selectCount);
   course = [
     { name: 'Angular', duration: '4 weeks' },
     { name: 'React', duration: '3 weeks' },
